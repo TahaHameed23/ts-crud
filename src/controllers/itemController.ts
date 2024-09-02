@@ -25,13 +25,16 @@ export const updateItem = (
     id: number,
     name: string,
     description: string
-): Item | undefined => {
+): Item | undefined | null => {
     const item = getItemById(id);
-    if (item) {
+    if (item && (item.name !== name || item.description !== description)) {
         item.name = name;
         item.description = description;
+        return item;
+    } else if (item && item.name === name && item.description === description) {
+        return null;
     }
-    return item;
+    return undefined;
 };
 
 export const deleteItem = (id: number): boolean => {
