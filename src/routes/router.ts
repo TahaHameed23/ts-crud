@@ -50,8 +50,8 @@ router.put(
 
 router.delete("/:id", (req, res) => {
     const id = parseInt(req.params.id, 10);
-    const succes = itemController.deleteItem(id);
-    if (succes) {
+    const success = itemController.deleteItem(id);
+    if (success) {
         res.status(204).send();
     } else {
         res.status(404).send("Item not found");

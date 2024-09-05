@@ -1,10 +1,17 @@
 import express, { Express, Request, Response, NextFunction } from "express";
 import itemsRouter from "./routes/router";
+import morgan from "morgan";
+import { protect } from "./modules/auth";
+import { createNewUser, signIn } from "./controllers/user";
 
 const app: Express = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use("/items", itemsRouter);
+app.use(morgan("dev"));
+
+app.use("/items", protect, itemsRouter);
+app.post("/user", createNewUser);
+app.post("/signin", signIn);
 
 app.get("/", (req, res, next) => {
     res.status(200);

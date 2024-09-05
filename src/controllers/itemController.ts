@@ -1,4 +1,4 @@
-import { Item } from "../models/item";
+import { Item } from "../models";
 
 let items: Item[] = [];
 let counter = 1;
